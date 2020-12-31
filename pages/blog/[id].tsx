@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import hydrate from "next-mdx-remote/hydrate";
 import { mdxComponents } from "../../components/mdx";
-import { getPostById, getPostIds, PostData } from "../../lib/post";
+import { getPostById, getPostIds } from "../../lib/post";
+import { PostData } from "../../lib/types";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const ids = await getPostIds();

@@ -5,17 +5,7 @@ import renderToString from "next-mdx-remote/render-to-string";
 import path from "path";
 import { mdxComponents } from "../components/mdx";
 import imageMetadata from "../plugins/image-metadata";
-
-export interface PostData {
-  id: string;
-  body: string;
-  frontMatter: {
-    name: string;
-    description: string;
-    category: string;
-    updated: string;
-  };
-}
+import { PostData } from "./types";
 
 export async function getPostById(id: string): Promise<PostData> {
   const allFiles = fs.readdirSync(path.join(process.cwd(), "posts"));
