@@ -1,8 +1,8 @@
 import fs from "fs";
-import fsPromise from "fs/promises";
 import matter from "gray-matter";
 import renderToString from "next-mdx-remote/render-to-string";
 import path from "path";
+import { promisify } from "util";
 import { mdxComponents } from "../components/mdx";
 import imageMetadata from "../plugins/image-metadata";
 import { PostData } from "./types";
@@ -16,7 +16,7 @@ export async function getPostById(id: string): Promise<PostData> {
   if (!file) return undefined;
 
   const data = (
-    await fsPromise.readFile(path.join(process.cwd(), "posts", `${id}.mdx`))
+    await promisify(fs.readFile)(path.join(process.cwd(), "posts", `${id}.mdx`))
   ).toString();
 
   const { content, data: metadata } = matter(data);
